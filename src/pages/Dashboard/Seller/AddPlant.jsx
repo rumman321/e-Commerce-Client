@@ -4,9 +4,11 @@ import { imageUpload } from '../../../api/utils'
 import useAuth from '../../../hooks/useAuth'
 import { useState } from 'react'
 import useAxiosSecure from '../../../hooks/useAxiosSecure'
+import { useNavigate } from 'react-router-dom'
 
 
 const AddPlant = () => {
+  const navigate = useNavigate()
   const {user}=useAuth()
   const axiosSecure = useAxiosSecure()
   const [upLoadImage, setUpLoadImage] = useState('Upload Image')
@@ -48,6 +50,7 @@ const AddPlant = () => {
       const {data}= await axiosSecure.post(`/plants`, plantData)
       // const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/plants`, plantData)
       // toast.success('Plant added successfully')
+      navigate('/dashboard/my-inventory')
     } catch (error) {
       console.log(error);
       
